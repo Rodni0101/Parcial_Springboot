@@ -3,33 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Productos</title>
+    <link rel="stylesheet" th:href="@{/css/inicio.css}">
 </head>
 <body>
-    <a th:href="@{/Editar}">Vista editar</a>
-    <a th:href="@{/Crear}">Vista crear</a>
+    <main class="page">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">CATÁLOGO</p>
+                <h1>Mis productos</h1>
+                <p class="subtitle">Administra los productos de tu inventario.</p>
+            </div>
+            <a class="button button-primary" th:href="@{/Crear}">＋ Nuevo producto</a>
+        </header>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Categoria</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="producto : ${productos}">
-                <td th:text="${producto.nombre}"></td>
-                <td th:text="${producto.categoria}"></td>
-                <td th:text="${producto.precio}"></td>
-                <td th:text="${producto.cantidadDisponible}"></td>
-                <td>
-                    <a th:href="@{/Editar/{id}(id=${producto.id})}">Editar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <section class="card">
+            <div class="card-heading">
+                <h2>Inventario</h2>
+                <span class="helper-text">Productos registrados</span>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="producto : ${productos}">
+                            <td class="product-name" th:text="${producto.nombre}"></td>
+                            <td th:text="${producto.categoria}"></td>
+                            <td th:text="|$${#numbers.formatDecimal(producto.precio, 1, 2)}|"></td>
+                            <td th:text="${producto.cantidadDisponible}"></td>
+                            <td>
+                                <a class="action-link" th:href="@{/Editar/{id}(id=${producto.id})}">Editar</a>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(productos)}">
+                            <td class="empty-state" colspan="5">
+                                Todavía no hay productos. ¡Agrega el primero!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

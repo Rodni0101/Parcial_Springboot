@@ -3,35 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crear producto</title>
+    <link rel="stylesheet" th:href="@{/css/crear.css}">
 </head>
 <body>
-    <h1>Vista para crear</h1>
+    <main class="page">
+        <a class="back-link" th:href="@{/}">← Volver al inventario</a>
 
-    <form th:action="@{/Crear}" th:object="${producto}" method="post">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" th:field="*{nombre}" required>
-        <br>
+        <section class="form-card">
+            <header class="form-header">
+                <p class="eyebrow">INVENTARIO</p>
+                <h1>Agregar producto</h1>
+                <p>Completa los datos para añadir un producto a tu inventario.</p>
+            </header>
 
-        <label for="categoria">Categoría:</label>
-        <input type="text" id="categoria" th:field="*{categoria}" required>
-        <br>
+            <form th:action="@{/Crear}" th:object="${producto}" method="post">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" th:field="*{nombre}" placeholder="Ej. Cuaderno universitario" required>
+                    </div>
 
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" th:field="*{precio}" min="0" step="0.01" required>
-        <br>
+                    <div class="form-field">
+                        <label for="categoria">Categoría</label>
+                        <input type="text" id="categoria" th:field="*{categoria}" placeholder="Ej. Papelería" required>
+                    </div>
 
-        <label for="cantidadDisponible">Cantidad disponible:</label>
-        <input type="number" id="cantidadDisponible" th:field="*{cantidadDisponible}" min="0" step="1" required>
-        <br>
+                    <div class="form-field">
+                        <label for="precio">Precio</label>
+                        <input type="number" id="precio" th:field="*{precio}" min="0" step="0.01" placeholder="0.00" required>
+                    </div>
 
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" th:field="*{descripcion}"></textarea>
-        <br>
+                    <div class="form-field">
+                        <label for="cantidadDisponible">Cantidad disponible</label>
+                        <input type="number" id="cantidadDisponible" th:field="*{cantidadDisponible}" min="0" step="1" placeholder="0" required>
+                    </div>
 
-        <button type="submit">Guardar producto</button>
-    </form>
+                    <div class="form-field form-field-full">
+                        <label for="descripcion">Descripción <span>(opcional)</span></label>
+                        <textarea id="descripcion" th:field="*{descripcion}" rows="4" placeholder="Agrega algún detalle sobre el producto"></textarea>
+                    </div>
+                </div>
 
-    <a th:href="@{/}">Volver al listado</a>
+                <div class="form-actions">
+                    <a class="button button-secondary" th:href="@{/}">Cancelar</a>
+                    <button class="button button-primary" type="submit">Guardar producto</button>
+                </div>
+            </form>
+        </section>
+    </main>
 </body>
 </html>
