@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 
 @Entity
 @Table(name = "productos")
@@ -23,6 +24,9 @@ public class Producto {
     private Integer cantidadDisponible;
 
     private String descripcion;
+
+    @Column(length = 255)
+    private String imagen;
 
     // Getters y Setters
 
@@ -72,5 +76,13 @@ public class Producto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

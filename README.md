@@ -71,9 +71,11 @@ Luego abro esta dirección en el navegador: <http://localhost:8080>.
 
 ```text
 src/main/java/com/example/Parcial/
+├── config/WebConfig.java
 ├── controlador/controller.java
 ├── model/Producto.java
-└── repository/ProductoRepository.java
+├── repository/ProductoRepository.java
+└── service/ProductoImageStorage.java
 
 src/main/resources/
 ├── templates/
@@ -83,9 +85,11 @@ src/main/resources/
 └── application.properties
 ```
 
-- **`Producto.java`** es como la ficha de un producto. Dice que tiene un ID, nombre, categoría, precio, cantidad y descripción.
+- **`Producto.java`** es como la ficha de un producto. Dice que tiene un ID, nombre, categoría, precio, cantidad, descripción y nombre del archivo de imagen.
 - **`ProductoRepository.java`** es el ayudante que busca y guarda productos en la base de datos.
 - **`controller.java`** recibe lo que pide el navegador y decide qué página mostrar o qué acción hacer.
+- **`ProductoImageStorage.java`** valida y guarda las imágenes en `uploads/productos/`; MySQL solo guarda el nombre del archivo.
+- **`WebConfig.java`** permite que el navegador pueda mostrar las imágenes guardadas.
 - **`templates`** tiene las páginas HTML que ve la persona en el navegador.
 - **`application.properties`** tiene la configuración para conectarse a MySQL.
 
@@ -117,9 +121,18 @@ Así viajan los datos:
 
 1. Abro `/Crear` y el controlador prepara un producto vacío.
 2. Escribo los datos en el formulario.
-3. Al apretar **Guardar producto**, el formulario manda los datos a `POST /Crear`.
-4. El controlador llama a `productoRepository.save(producto)` para guardarlos.
-5. La página vuelve al inicio y puedo ver el producto en la tabla.
+3. Selecciono una imagen JPG, PNG o GIF de hasta 5 MB.
+4. Al apretar **Guardar producto**, el formulario manda los datos y la imagen a `POST /Crear`.
+5. La aplicación guarda el archivo en `uploads/productos/` y el nombre del archivo en MySQL.
+6. La página vuelve al inicio y puedo ver el producto en una card con su imagen.
+
+La carpeta de imágenes está ignorada por Git. Si cambio de computadora o despliego la aplicación, también debo copiar esa carpeta o configurar un almacenamiento persistente.
+
+### Editar un producto
+
+Desde la card de un producto, el enlace **Editar producto** abre `/Editar/{id}`. El controlador busca ese producto en MySQL y `editar.html` muestra sus datos actuales. Al enviar el formulario, `POST /Editar/{id}` carga de nuevo el registro existente y actualiza sus campos para no reemplazar por accidente su ID o el nombre de la imagen.
+
+La imagen es opcional al editar: si no selecciono otra, se conserva la actual. Si selecciono una imagen válida, se guarda el archivo nuevo y se actualiza el nombre asociado al producto.
 
 ## El repositorio y sus métodos
 
