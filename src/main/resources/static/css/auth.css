@@ -1,0 +1,17 @@
+:root { font-family: Inter, Arial, sans-serif; color: #17251f; background: #eef5f0; }
+* { box-sizing: border-box; }
+body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at 15% 10%, #d9f2df, transparent 40%), #eef5f0; }
+.auth-card { width: min(100%, 430px); padding: 42px; background: #fff; border: 1px solid #dce8df; border-radius: 24px; box-shadow: 0 22px 60px #1d4b3020; }
+.brand { display: flex; align-items: center; gap: 10px; margin-bottom: 38px; font-size: 21px; font-weight: 800; }
+.brand img { width: 32px; height: 32px; } .brand span span { color: #47a76a; }
+.eyebrow { margin: 0 0 8px; color: #3a9a5f; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
+h1 { margin: 0; font-size: 34px; } .subtitle { color: #68766e; margin: 9px 0 24px; }
+label { display: block; margin: 16px 0 7px; font-size: 13px; font-weight: 700; }
+input { width: 100%; padding: 13px 14px; border: 1px solid #cad9ce; border-radius: 10px; font: inherit; outline-color: #55ae73; }
+.password-field { position: relative; display: flex; align-items: center; }
+.password-field input { padding-right: 78px; }
+.toggle-password { position: absolute; right: 8px; width: auto; margin: 0; padding: 7px 8px; border: 0; background: transparent; color: #25834b; font-size: 12px; }
+.toggle-password:hover { background: #eef8f1; }
+button { width: 100%; margin-top: 24px; padding: 14px; border: 0; border-radius: 10px; background: #2f9458; color: white; font: inherit; font-weight: 700; cursor: pointer; }
+.switch { margin: 22px 0 0; text-align: center; color: #68766e; font-size: 14px; } a { color: #25834b; font-weight: 700; }
+.message { padding: 11px 13px; border-radius: 9px; font-size: 13px; } .error { color: #a23c3c; background: #fff0f0; } .success { color: #267046; background: #ebf8ef; }

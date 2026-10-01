@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Crear cuenta · SpringStore</title>
+        <link rel="stylesheet" th:href="@{/css/auth.css}" />
+    </head>
+    <body>
+        <main class="auth-card">
+            <div class="brand">
+                <img th:src="@{/favicon.svg}" alt="" />
+                <span>
+                    Spring
+                    <span>Store</span>
+                </span>
+            </div>
+            <p class="eyebrow">NUEVA CUENTA</p>
+            <h1>Regístrate</h1>
+            <p class="subtitle">Crea tu cuenta para consultar el catálogo.</p>
+            <p class="message error" th:if="${error}" th:text="${error}"></p>
+            <form th:action="@{/registro}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <label for="nombreUsuario">Nombre de usuario</label>
+                <input id="nombreUsuario" name="nombreUsuario" type="text" minlength="3" maxlength="50"
+                       pattern="[a-zA-Z0-9._-]{3,50}" placeholder="Ej. juan.perez" required autofocus />
+                <label for="correo">Correo</label>
+                <input id="correo" name="correo" type="email" placeholder="tu@correo.com" required />
+                <label for="contrasena">Contraseña</label>
+                <div class="password-field">
+                    <input id="contrasena" name="contrasena" type="password" minlength="8" placeholder="Mínimo 8 caracteres" required />
+                    <button class="toggle-password" type="button" data-password-target="contrasena">Mostrar</button>
+                </div>
+                <label for="confirmarContrasena">Confirmar contraseña</label>
+                <div class="password-field">
+                    <input id="confirmarContrasena" name="confirmarContrasena" type="password" minlength="8" required />
+                    <button class="toggle-password" type="button" data-password-target="confirmarContrasena">Mostrar</button>
+                </div>
+                <button type="submit">Crear cuenta</button>
+            </form>
+            <p class="switch">
+                ¿Ya tienes cuenta?
+                <a th:href="@{/login}">Inicia sesión</a>
+            </p>
+        </main>
+        <script th:src="@{/js/password-toggle.js}"></script>
+    </body>
+</html>

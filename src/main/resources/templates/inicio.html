@@ -34,7 +34,17 @@
                 </svg>
                 <span class="theme-label">Tema oscuro</span>
             </button>
-            <a class="button button-nav" th:href="@{/Crear}">＋ Agregar producto</a>
+            <a class="button button-nav" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/Crear}">＋ Agregar producto</a>
+            <div class="account-actions">
+                <span class="topbar-user">
+                    <span class="user-status" aria-hidden="true"></span>
+                    <span class="username-text" th:text="${#authentication.name}"></span>
+                </span>
+                <form class="logout-form" th:action="@{/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <button class="button button-nav" type="submit">Cerrar sesión</button>
+                </form>
+            </div>
         </div>
     </nav>
 
@@ -131,8 +141,8 @@
                             </div>
                             <span class="stock" th:text="|Stock: ${producto.cantidadDisponible}|"></span>
                         </div>
-                        <a class="edit-link" th:href="@{/Editar/{id}(id=${producto.id})}">Editar producto <span aria-hidden="true">→</span></a>
-                        <form class="delete-form" th:action="@{/Eliminar/{id}(id=${producto.id})}" method="post"
+                        <a class="edit-link" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/Editar/{id}(id=${producto.id})}">Editar producto <span aria-hidden="true">→</span></a>
+                        <form class="delete-form" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:action="@{/Eliminar/{id}(id=${producto.id})}" method="post"
                               onsubmit="return confirm('¿Seguro que quieres eliminar este producto?');">
                             <button class="delete-button" type="submit">Eliminar producto</button>
                         </form>
@@ -144,7 +154,7 @@
                 <span class="empty-icon" aria-hidden="true">◇</span>
                 <h3>Aún no hay productos</h3>
                 <p>Cuando agregues productos, aparecerán aquí.</p>
-                <a class="button button-primary" th:href="@{/Crear}">Agregar el primero</a>
+                <a class="button button-primary" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/Crear}">Agregar el primero</a>
             </div>
         </section>
     </main>

@@ -98,6 +98,48 @@ body {
     margin-left: auto;
 }
 
+.account-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 4px;
+    padding-left: 12px;
+    border-left: 1px solid rgba(210, 239, 220, 0.22);
+}
+
+.logout-form {
+    display: contents;
+}
+
+.topbar-user {
+    display: inline-flex;
+    flex: 0 0 auto;
+    min-height: 36px;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4px 0 10px;
+    color: #e3f5e8;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+.username-text {
+    display: inline-block;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-status {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #72f09a;
+    box-shadow: 0 0 0 3px rgba(114, 240, 154, 0.12);
+}
+
 .theme-toggle {
     display: inline-flex;
     min-height: 36px;
@@ -167,6 +209,7 @@ html[data-theme="dark"] .theme-icon-moon {
     color: #fff;
     background: #29935f;
     font-size: 0.82rem;
+    box-shadow: 0 4px 12px rgba(11, 68, 40, 0.16);
 }
 
 .button-nav:hover,
@@ -830,8 +873,19 @@ p {
         display: none;
     }
 
+    .topbar-user {
+        padding-left: 3px;
+        font-size: 0.72rem;
+    }
+
     .topbar-actions {
         gap: 6px;
+    }
+
+    .account-actions {
+        gap: 6px;
+        margin-left: 0;
+        padding-left: 6px;
     }
 
     .theme-toggle {
@@ -951,6 +1005,10 @@ html[data-theme="dark"] .brand-name span {
 
 html[data-theme="dark"] .topbar-label {
     color: #a0c5ab;
+}
+
+html[data-theme="dark"] .topbar-user {
+    color: #d9ffe4;
 }
 
 html[data-theme="dark"] .theme-toggle {
